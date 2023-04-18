@@ -1,0 +1,10 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-27072010-079244";"";
+"REFERENCE";"A-BM64ABR-1";"";
+"TraceParts.PartTitle";"DIN 41612, style B, male, 16 - 64 contacts, pitch 2.54mm";"";
+"TraceParts.InstanceId";"10-27072010-079244AF7FB7TEG8P7RZZJ1AFMGNGAB";"";
+"SUPPLIER";"ASSMANN WSW components";"";
+"DESIGN";"DIN 41612, style B, male, pitch 2.54mm, 64ab contacts, Right-angled, Class 1";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TraceParts.PartLanguage";"en";"";
+"TraceParts.PartVersion";"1.1.8";"";
