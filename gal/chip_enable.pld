@@ -3,14 +3,15 @@ aprimem    ;
 
 
 Clock	DEN	A17	A8	A16	A9	RES	A18	A19	GND
-/OE	NC	NC	MEMCS	NC	NC	NC	RDY	BEN	VCC
+/OE	MWTC	MRDC	MEMCS	NC	NC	NC	ENA	BEN	VCC
 
 MEMCS	= A19 + /A18 + /RES
 BEN	= A19 + /A18 + /RES + /DEN
-RDY.R	= MEMCS
+
+ENA = MWTC * MRDC + /MWTC * /MRDC
 
 DESCRIPTION
-HW Rev 1.3.1
+HW Rev 1.3.2
 
 1. Memory expansion 
   * +640KB, goes from 0x20000 to 0x0XBFFFF

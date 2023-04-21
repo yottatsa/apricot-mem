@@ -2,6 +2,6 @@
 
 
     make -C gal
-    minipro -p ATF16V8C --write chip_enable.jed -P
+    minipro -p ATF16V8C --write gal/chip_enable.jed -P
 
 
