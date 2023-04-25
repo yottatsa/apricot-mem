@@ -5,18 +5,21 @@ aprimem    ;
 Clock	DEN	A17	A8	A16	A9	RES	A18	A19	GND
 /OE	MWTC	MRDC	MEMCS	NC	NC	NC	ENA	BEN	VCC
 
-MEMCS	= A19 + /A18 + /RES
-BEN	= A19 + /A18 + /RES + /DEN
+MEMCS	= /A19 * /A18 + A19 * A18 * A17 + /RES
+BEN	= /A19 * /A18 + A19 * A18 * A17 + /DEN + /RES
 
 ENA = MWTC * MRDC + /MWTC * /MRDC
 
 DESCRIPTION
 HW Rev 1.3.2
 
-1. Memory expansion 
-  * +640KB, goes from 0x20000 to 0x0XBFFFF
-  * +704KB
+1. Memory expansion goes from 0x40000
+  * +256KB, 0x7ffff
+  * +512KB, 0xbffff
+  * +640KB, 0xdffff
+  * stretch: +704KB, 0xeffff
 2. 4x8bit IO ports on expansion connector 0x180
+
 
 Minimal formula:
 if ((A[19..16] is set) and DEN == 0) then { BEN = 0; MEMCS = 0 }
@@ -25,15 +28,14 @@ if ((A[19..16] is set) and DEN == 0) then { BEN = 0; MEMCS = 0 }
 Python3 formula helper:
 >>> print(f"A[19..16] = [{bin(0x20000)[2:].zfill(20)[0:4]}]")
 
-0x20000 A[19..16] = [0010]
-0x40000 A[19..16] = [0100]
-0x60000 A[19..16] = [0110]
-0x80000 A[19..16] = [1000]
-0xa0000 A[19..16] = [1010]
-0xc0000 A[19..16] = [1100]
-0xd0000 A[19..16] = [1101]
-0xe0000 A[19..16] = [1110]
-
+0x30000 A[19..16] = [0011]
+0x40000 A[19..16] = [0100] +256
+0x60000 A[19..16] = [0110] +256
+0x80000 A[19..16] = [1000] +512
+0xa0000 A[19..16] = [1010] +512
+0xc0000 A[19..16] = [1100] +640
+0xe0000 A[19..16] = [1110] +704
+0xf0000 A[19..16] = [1111]
 
 5MHz => 200ns
 15MHz => 66ns
