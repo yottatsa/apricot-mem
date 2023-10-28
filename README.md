@@ -3,8 +3,9 @@
 Additional 640KB RAM
 
 [Schematics](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fyottatsa%2Fapricot-mem%2Fblob%2Fmain%2Fpcb%2Fapricot-mem.kicad_sch), 
-[PCB](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fyottatsa%2Fapricot-mem%2Fblob%2Fmain%2Fpcb%2Fapricot-mem.kicad_pcb)
+[PCB](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fyottatsa%2Fapricot-mem%2Fblob%2Fmain%2Fpcb%2Fapricot-mem.kicad_pcb), [Order from AISLER](https://aisler.net/p/DJKRDMKA)
 
+## Building and flashing GAL
 
     make -C gal
     minipro -p ATF16V8C --write gal/chip_enable.jed -P
@@ -12,7 +13,6 @@ Additional 640KB RAM
 ## ToDo
 
 * Loading caps on signal lines
-* Board a bit tight near the floppy, trim the right side
 * Move GAL to the left so it will be accessible without pulling the card
 * Move testpoints to the bottom/make them THT, as it will make it more accessible from the case
 * 3D-print a frame to hold the card in place

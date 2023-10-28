@@ -2,6 +2,7 @@
 fp-info-cache
 *.swp
 *.bak
+~*.lck
 
 *-backups
 
