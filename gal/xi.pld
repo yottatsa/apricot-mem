@@ -1,5 +1,5 @@
 GAL16V8    ;
-aprimem    ;
+aprimemxi  ;
 
 
 Clock	DEN	A17	A8	A16	A9	RES	A18	A19	GND
@@ -11,7 +11,7 @@ BEN	= /A19 * /A18 + A19 * A18 * A17 + /DEN + /RES
 ENA = MWTC * MRDC + /MWTC * /MRDC
 
 DESCRIPTION
-HW Rev 1.3.2
+HW Rev 1.3.2-1
 
 1. Memory expansion goes from 0x40000
   * +256KB, 0x7ffff
@@ -23,20 +23,18 @@ HW Rev 1.3.2
 
 Minimal formula:
 if ((A[19..16] is set) and DEN == 0) then { BEN = 0; MEMCS = 0 }
+F = lambda p: ((not p.A19) and (not p.A18)) or (p.A19 and p.A18 and p.A17)
 
-
-Python3 formula helper:
->>> print(f"A[19..16] = [{bin(0x20000)[2:].zfill(20)[0:4]}]")
-0x10000 A[19..16] = [0001]
-0x20000 A[19..16] = [0010] 
-0x30000 A[19..16] = [0011]
-0x40000 A[19..16] = [0100] +256
-0x60000 A[19..16] = [0110] +256
-0x80000 A[19..16] = [1000] +512
-0xa0000 A[19..16] = [1010] +512
-0xc0000 A[19..16] = [1100] +640
-0xe0000 A[19..16] = [1110] +704
-0xf0000 A[19..16] = [1111]
-
-5MHz => 200ns
-15MHz => 66ns
+Helper output:
+0x10000  64KB A[19..16] = [0001] D
+0x1ffff 128KB A[19..16] = [0001] D
+0x20000 128KB A[19..16] = [0010] D
+0x3ffff 256KB A[19..16] = [0011] D
+0x40000 256KB A[19..16] = [0100] E
+0x6ffff 448KB A[19..16] = [0110] E
+0x80000 512KB A[19..16] = [1000] E
+0xa0000 640KB A[19..16] = [1010] E
+0xc0000 768KB A[19..16] = [1100] E
+0xdffff 896KB A[19..16] = [1101] E
+0xe0000 896KB A[19..16] = [1110] D
+0xf0000 960KB A[19..16] = [1111] D

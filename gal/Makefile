@@ -1,4 +1,4 @@
-sources = xi.pld
+sources = xi.pld f1e.pld
 
 all: $(sources:.pld=.jed)
 	@ls -lh $^

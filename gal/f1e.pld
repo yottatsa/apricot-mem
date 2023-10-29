@@ -1,0 +1,36 @@
+GAL16V8    ;
+aprimemf1e ;
+
+
+Clock	DEN	A17	A8	A16	A9	RES	A18	A19	GND
+/OE	MWTC	MRDC	MEMCS	NC	NC	NC	ENA	BEN	VCC
+
+MEMCS	= /A19 * /A18 * /A17 + A19 * A18 * A17 + /RES
+BEN	= /A19 * /A18 * /A17 + A19 * A18 * A17 + /DEN + /RES
+
+ENA = MWTC * MRDC + /MWTC * /MRDC
+
+DESCRIPTION
+HW Rev 1.3.2-1
+
+1. For Apricot F1e in 128K configuration memory expansion goes from 0x20000 to 0xbffff, which gives +640KB
+2. 0xbffff to 0xdffff is marked as reserved, tho it might be expandable, which gives +768KB and puts it on par with Xi with 896K RAM.
+
+
+Minimal formula:
+if ((A[19..17] is set) and DEN == 0) then { BEN = 0; MEMCS = 0 }
+F = lambda p: ((not p.A19) and (not p.A18) and (not p.A17)) or (p.A19 and p.A18 and p.A17)
+
+Helper output:
+0x10000  64KB A[19..17] = [000] D
+0x1ffff 128KB A[19..17] = [000] D
+0x20000 128KB A[19..17] = [001] E
+0x3ffff 256KB A[19..17] = [001] E
+0x40000 256KB A[19..17] = [010] E
+0x6ffff 448KB A[19..17] = [011] E
+0x80000 512KB A[19..17] = [100] E
+0xa0000 640KB A[19..17] = [101] E
+0xc0000 768KB A[19..17] = [110] E
+0xdffff 896KB A[19..17] = [110] E
+0xe0000 896KB A[19..17] = [111] D
+0xf0000 960KB A[19..17] = [111] D
