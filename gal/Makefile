@@ -1,12 +1,12 @@
-sources = chip_enable.pld
+sources = xi.pld
 
 all: $(sources:.pld=.jed)
 	@ls -lh $^
 
-GALasm:
-	git submodule update $@
+GALasm/src:
+	git submodule update --init GALasm
 
-GALasm/src/galasm: GALasm
+GALasm/src/galasm: GALasm/src
 	make -C GALasm/src galasm
 
 %.jed:	%.pld GALasm/src/galasm Makefile
